@@ -1,4 +1,11 @@
 const mainData = () => {
+
+  const renderAnimeList = (array, ganres) => {
+    console.log('array: ', array);
+    console.log('ganres: ', ganres);
+
+  }
+
   const renderTopAnime = (array) => {
     const wrapper = document.querySelector(".filter__gallery");
     wrapper.innerHTML = "";
@@ -22,7 +29,7 @@ const mainData = () => {
     elements.forEach((elem) => {
       elem.style.backgroundImage = `url(${elem.dataset.setbg})`;
     });
-    
+
   };
 
   fetch("../db.json")
@@ -30,7 +37,15 @@ const mainData = () => {
       return response.json();
     })
     .then((data) => {
+      const ganres = new Set()
+
       renderTopAnime(data.anime.sort((a, b) => b.views - a.views).slice(0, 5));
+
+      data.anime.forEach(item => {
+        ganres.add(item.ganre)
+      })
+      
+      renderAnimeList(data.anime, ganres)
     });
 };
 
