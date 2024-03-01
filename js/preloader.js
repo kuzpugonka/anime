@@ -1,5 +1,4 @@
 const preloader = document.querySelector(".preloader");
-console.log('preloader: ', preloader);
 preloader.classList.add("active");
 
 setTimeout(() => {
