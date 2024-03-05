@@ -4,6 +4,8 @@ const mainData = () => {
   const renderGanreList = (ganres) => {
     const dropdownBlock = document.querySelector(".header__menu .dropdown");
 
+    // dropdownBlock.innerHTML = ''
+
     ganres.forEach((ganre) => {
       dropdownBlock.insertAdjacentHTML(
         "beforeend",
@@ -17,7 +19,7 @@ const mainData = () => {
   const renderAnimeList = (array, ganres) => {
     const wrapper = document.querySelector(".product .col-lg-8");
 
-    wrapper.innerHTML = "";
+    // wrapper.innerHTML = "";
 
     ganres.forEach((ganre) => {
       const productBlock = document.createElement("div");
@@ -101,7 +103,7 @@ const mainData = () => {
 
   const renderTopAnime = (array) => {
     const wrapper = document.querySelector(".filter__gallery");
-    wrapper.innerHTML = "";
+    // wrapper.innerHTML = "";
 
     array.forEach((item) => {
       wrapper.insertAdjacentHTML(
@@ -128,13 +130,12 @@ const mainData = () => {
     .then((data) => {
       const ganres = new Set();
       
-      data.anime.forEach((item) => {
+      data.forEach((item) => {
         ganres.add(item.ganre);
       });
 
-      renderTopAnime(data.anime.sort((a, b) => b.views - a.views).slice(0, 5));
-
-      renderAnimeList(data.anime, ganres);
+      renderTopAnime(data.sort((a, b) => b.views - a.views).slice(0, 5));
+      renderAnimeList(data, ganres);
       renderGanreList(ganres);
     });
 };
